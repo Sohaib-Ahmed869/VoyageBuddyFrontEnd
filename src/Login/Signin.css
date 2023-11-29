@@ -1,0 +1,106 @@
+.login {
+    display: flex;
+    flex-direction: row;
+}
+
+.login .login_image {
+    height: 100%;
+}
+
+.login .login_form {
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+}
+
+.login .login_form h2 {
+    font-size: 30px;
+    margin-top: 50px;
+    margin-bottom: 0px;
+}
+
+.login_form .subtitle {
+    font-size: 16px;
+    margin-bottom: 50px;
+}
+
+.login .login_form .logo {
+    width: 230px;
+    height: 42px;
+}
+
+.login .login_form input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.login .login_form button {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20%;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    font-size: 16px;
+    background-color: #8566FF;
+    color: #fff;
+    cursor: pointer;
+    display: block; /* Ensure it takes up the full width */
+}
+
+.login .login_form button:hover {
+    background-color: #6A4BFF;
+}
+
+.donthave {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #918f8f;
+    text-align: center;
+}
+
+.forgotpass {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #8566FF;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forgotpass:hover {
+    text-decoration: underline;
+}
+
+.login_form_social p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #918f8f;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.login_form_social .login_form_social_icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.login_form_social .login_form_social_icons img {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+    padding: 10px 40px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
