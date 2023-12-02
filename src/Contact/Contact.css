@@ -1,0 +1,109 @@
+.contact-us {
+    padding: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.contact-us p {
+    color:rgb(50, 50, 50);
+    font-weight: 500;
+    margin-bottom: 50px;
+}
+
+.contact-us-image {
+    width: 50%;
+    height: 50%;
+}
+
+.contact-us-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.contact-us-form {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.contact-us-form .row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-content: space-between;
+
+}
+
+.contact-us-form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgb(190, 192, 192);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.contact-us-form .row .name, .contact-us-form .row .email,
+.contact-us-form .row .Subject, .contact-us-form .row .phone {
+    width: 45%;
+}
+
+.contact-us-form .row .name, .contact-us-form .row .email,
+.contact-us-form .row .Subject, .contact-us-form .row .phone label {
+    color:rgb(50, 50, 50);
+}
+
+.contact-us-form .row .message {
+    width: 100%;
+    
+}
+
+.contact-us-form .row .message input {
+    height: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .contact-us {
+        flex-direction: column;
+        padding: 50px;
+    }
+
+    .contact-us-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .contact-us-form {
+        width: 100%;
+        height: 100%;
+    }
+
+    .contact-us-form .row {
+        flex-direction: column;
+    }
+
+    .contact-us-form .row .name, .contact-us-form .row .email,
+    .contact-us-form .row .Subject, .contact-us-form .row .phone {
+        width: 100%;
+    }
+
+    .contact-us-form .row .name, .contact-us-form .row .email,
+    .contact-us-form .row .Subject, .contact-us-form .row .phone label {
+        color:rgb(50, 50, 50);
+    }
+
+    .contact-us-form .row .message {
+        width: 100%;
+        
+    }
+
+    .contact-us-form .row .message input {
+        height: 100px;
+    }
+}

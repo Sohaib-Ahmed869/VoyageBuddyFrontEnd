@@ -1,0 +1,28 @@
+.hero {
+    margin-top: 120px;
+    background-image: url('../../public/Booking_img.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.hero .hero__text {
+    display: flex;
+    flex-direction: column;
+    padding: 200px;
+    color: white;
+}
+
+.hero .hero__text h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.hero .hero__text p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0px;
+    letter-spacing: 3px;
+}

@@ -1,0 +1,49 @@
+.newsletter {
+    padding: 100px;
+    text-align: center;
+    line-height: 1.5;
+    color: #5E6282;
+}
+.Home_Letter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-image: url('../../public/bg_letter.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.Home_Letter_Text form {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.Home_Letter_Text form input {
+    width: 50%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #5E6282;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.Home_Letter_Text form input::placeholder {
+    color: #5E6282;
+}
+
+.Home_Letter_Text form button {
+    width: 40%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #5E6282;
+    background: linear-gradient(180deg, #FF946D 0%, #FF7D68 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}

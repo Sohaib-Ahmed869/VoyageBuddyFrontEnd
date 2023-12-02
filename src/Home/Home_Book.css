@@ -1,0 +1,50 @@
+.home_book {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home_book .home_book_text {
+    padding: 50px;
+    width: 40%;
+    padding-left: 7%;
+}
+
+.home_book .home_book_text h2 {
+    font-size: 40px;
+    width: 80%;
+}
+
+.home_book .home_book_img .img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.home_book .home_book_text .steps .step {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.home_book .home_book_text .steps .step .step_text {
+    padding: 10px;
+    width: 70%;
+ 
+}
+
+.home_book .home_book_text .steps .step .step_text p {
+    color:#706f6f;
+}
+
+.home_book .home_book_text h3 {
+    color: #6A4BFF;
+}
+
+.home_book .home_book_text .steps .step .step_text h3{
+    color: #2e2e2e;
+}

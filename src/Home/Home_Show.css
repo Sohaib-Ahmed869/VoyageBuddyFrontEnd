@@ -1,0 +1,63 @@
+.services {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+    padding: 150px; 
+    color: white;  
+    text-align: center;
+}
+
+.services .service1 {
+    background-image: url(../../public/hotels.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40%;
+    height: 560px;
+    border-radius: 20px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.services .service2 {
+    background-image: url(../../public/flights.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40%;
+    height: 560px;
+    border-radius: 20px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.services button {
+    background-color: #6A4BFF;
+    color: #ffffff;
+    border-radius: 35px;
+    padding: 15px 20px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.services button:hover {
+    background-color: #ffffff;
+    color: #6A4BFF;
+    border: 1px solid #6A4BFF;
+}
+
+.services .service1 .text {
+    margin-bottom: 40px;
+}
+
+.services .service2 .text {
+    margin-bottom: 40px;
+}
