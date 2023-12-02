@@ -69,6 +69,7 @@ const Checkout = () => {
         return finalTotal.toFixed(2); // Return the total with two decimal places
     };
 
+
     return (
         <div>
             <Navbar />
@@ -222,9 +223,13 @@ const Checkout = () => {
                             </div>
                         </div>
 
-                        <button className="submit-button">Pay</button>
+                        <button
+
+                            className="submit-button"
+                            onClick={() => setModalIsOpen(false)}
+                            >Pay</button>
                     </form>
-                    
+
                     <div className="terms-of-service">
                         <p>By confirming your subscription, you allow The Outdoor Inn Crowd Limited to charge your card for this payment and future payments in accordance with their terms. You can always cancel your subscription.</p>
                     </div>

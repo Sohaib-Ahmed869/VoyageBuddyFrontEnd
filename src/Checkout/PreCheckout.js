@@ -44,6 +44,11 @@ const PreCheckout = () => {
         }
     }
 
+    const handleNext = () => {
+        window.location.href = "/trip";
+    }
+
+
     return (
         <div>
             <Navbar />
@@ -129,7 +134,9 @@ const PreCheckout = () => {
                         </div>
                         <div className="precheckout_form_left_submit">
                             <button className="back" type="submit">Back</button>
-                            <button className="next" type="submit">Build my trip</button>
+                            <button className="next" type="submit" onClick={
+                                handleNext
+                            }>Build my trip</button>
                         </div>
                     </div>
 

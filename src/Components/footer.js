@@ -28,7 +28,7 @@ const Footer = () => {
                     <div className="footer_top_right_2">
                         <h3>Company</h3>
                         <ul>
-                            <li><a>About</a></li>
+                            <li><a href="/about">About</a></li>
                             <li><a>Contact Us</a></li>
                         </ul>
                     </div>

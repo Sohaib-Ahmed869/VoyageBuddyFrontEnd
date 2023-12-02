@@ -6,6 +6,31 @@ import Footer from "../Components/footer";
 import DateTimeRangePicker from "./DatePicker";
 import './Booking.css';
 
+const top_destination = [
+    {
+        id: 1,
+        img: "./1.png",
+        title: "Location 1",
+        price: "$100",
+        days: "3 days",
+    },
+    {
+        id: 2,
+        img: "./1.png",
+        title: "Location 2",
+        price: "$200",
+        days: "5 days",
+    },
+    {
+        id: 3,
+        img: "./1.png",
+        title: "Location 3",
+        price: "$300",
+        days: "7 days",
+    },
+]
+
+
 const Booking = () => {
     // State for date, time, location, and number of people
     const [startDate, setStartDate] = useState(new Date());
@@ -35,8 +60,7 @@ const Booking = () => {
     ];
 
     const handleSearch = () => {
-        // Handle the search functionality here
-        // You can use the selected values (startDate, endDate, selectedLocation, selectedPeople, selectedTime) to perform the search
+       window.location.href = "/precheckout";
     };
 
     return (
@@ -51,8 +75,8 @@ const Booking = () => {
                 <div className="search-bottom">
                     <div className="date">
                         <h2>Date</h2>
-                        
-                        
+
+
                     </div>
                     <div className="time">
                         <h2>Time</h2>
@@ -88,6 +112,24 @@ const Booking = () => {
             </div>
             <div className="ad">
                 <img src="./ad.png" alt="ad" />
+            </div>
+            <div className="top-destination">
+                <h1>✈ • Top Destinations</h1>
+                <p>Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, <br></br>we’ve got the travel tools to get you to your destination.</p>
+                <div className="top-destination-container">
+                    {top_destination.map((item) => (
+                        <div className="top-destination-card" key={item.id}>
+                            <img src={item.img} alt="top-destination" />
+                            <div className="top-destination-card-info">
+                                <h3>{item.price}</h3>
+                                <h2>{item.title}</h2>
+                                <div className="line">
+                                    <h4>✈ {item.days} trip </h4>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
             <Footer />
         </div>

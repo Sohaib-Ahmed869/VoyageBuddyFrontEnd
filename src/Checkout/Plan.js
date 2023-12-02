@@ -82,6 +82,9 @@ const date = {
 
 const Trip = () => {
 
+    const navigateToCheckOut = () => {
+        window.location.href = "/checkout";
+    }
     const budget = 10000;
     const activities = 5000;
     const transport = 5000;
@@ -125,7 +128,9 @@ const Trip = () => {
                         <h1>Budget Breakdown: ${budget} in Total </h1>
                         <h2>Activities: {activities}</h2>
                         <h2>Transport: {transport}</h2>
-                        <button>Buy this itinerary</button>
+                        <button
+                            onClick={navigateToCheckOut}
+                        >Buy this itinerary</button>
                     </div>
                 </div>
                
