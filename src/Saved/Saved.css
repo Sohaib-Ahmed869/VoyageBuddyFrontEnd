@@ -1,0 +1,123 @@
+/* Saved.css */
+.Saved-main {
+    padding: 200px; /* Adjust the padding as needed */
+}
+.Saved {
+    width: 100%;
+}
+.Saved-Items .price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #555;
+    margin-bottom: 14px;
+    text-align: right;
+}
+
+.Saved-Item .location {
+    font-size: 14px;
+    font-weight: 800;
+    color: #555;
+    margin-bottom: 14px;
+    text-align: left;
+}
+.Saved-Items {
+
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.Saved-Item {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0px 18px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.Saved-Item-Image img {
+    padding: 30px;
+    width: 90%;
+    height: auto;
+    border-radius: 8px 0 0 8px; /* Round the left corners */
+}
+
+.Saved-Item-Details {
+    flex: 1; /* Take remaining space in the row */
+    padding: 15px;
+    display: flex;
+    flex-direction: row; /* Align details in two columns */
+}
+
+.Saved-Item-Details h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.Saved-Item-Details p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 14px;
+}
+
+.column {
+    flex: 1; /* Equal width for both columns */
+}
+
+.date,
+.time,
+.groups,
+.transportation,
+.duration,
+.guide,
+.language,
+.entryfee {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.date img,
+.time img,
+.groups img,
+.transportation img,
+.duration img,
+.guide img,
+.language img,
+.entryfee img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1390px) {
+    .Saved-main {
+        padding: 100px;
+    }
+    .Saved-Item-Image img {
+        border-radius: 8px 8px 0 0; /* Round all corners */
+        width: 80%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .Saved-main {
+        padding: 50px;
+    }
+
+    .Saved-Item{
+        flex-direction: column;
+    }
+
+    .Saved-Item-Image img {
+        border-radius: 8px 8px 0 0; /* Round all corners */
+        width: 90%;
+        height: auto;
+    }
+}

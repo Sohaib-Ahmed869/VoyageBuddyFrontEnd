@@ -12,6 +12,10 @@ import Contact from "./Contact/Contact";
 import About from "./About/About";
 import OrderCompleted from "./Order/OrderCompleted";
 import Profile from "./Profile/Profile";
+import Saved from "./Saved/Saved";
+import Checkout from "./Checkout/Checkout";
+import PreCheckout from "./Checkout/PreCheckout";
+import Trip from "./Checkout/Plan";
 
 import "./App.css";
 function App() {
@@ -31,6 +35,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/ordercompleted" element={<OrderCompleted />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/saved" element={<Saved />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/precheckout" element={<PreCheckout />} />
+          <Route path="/trip" element={<Trip />} />
         </Routes>
       </Router>
 
