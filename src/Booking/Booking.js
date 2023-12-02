@@ -3,7 +3,6 @@ import Select from "react-select";
 import Hero from "./Hero";
 import Navbar from "../Components/nav";
 import Footer from "../Components/footer";
-import DateTimeRangePicker from "./DatePicker";
 import './Booking.css';
 
 const top_destination = [
@@ -49,7 +48,14 @@ const Booking = () => {
     const peopleOptions = [
         { value: 1, label: "1 person" },
         { value: 2, label: "2 persons" },
-        // Add more options up to 8
+        { value: 3, label: "3 persons" },
+        { value: 4, label: "4 persons" },
+        { value: 5, label: "5 persons" },
+        { value: 6, label: "6 persons" },
+        { value: 7, label: "7 persons" },
+        { value: 8, label: "8 persons" },
+        { value: 9, label: "9 persons" },
+        { value: 10, label: "10 persons" },
     ];
 
     const timeOptions = [
@@ -60,7 +66,7 @@ const Booking = () => {
     ];
 
     const handleSearch = () => {
-       window.location.href = "/precheckout";
+        window.location.href = "/precheckout";
     };
 
     return (
@@ -72,41 +78,61 @@ const Booking = () => {
                 <div className="search-top">
                     <h3>DESCRIBE YOUR DESTINATION</h3>
                 </div>
-                <div className="search-bottom">
-                    <div className="date">
-                        <h2>Date</h2>
+                <div className="holder">
+                    <div className="search-bottom">
+                        <div className="date">
+                            <h2>Date</h2>
+                            <div className="date-container">
+                                <div className="date-range">
+                                    <input
+                                        type="date"
+                                        value={startDate}
+                                        onChange={(e) => setStartDate(e.target.value)}
+                                    />
+                                </div>
+                                <div className="date-range">
+                                    <input
+                                        type="date"
+                                        value={endDate}
+                                        onChange={(e) => setEndDate(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                        </div>
 
+                        <div className="time">
+                            <h2>Time</h2>
+                            <Select
+                                className="select"
+                                options={timeOptions}
+                                value={selectedTime}
+                                onChange={(value) => setSelectedTime(value)}
+                            />
+                        </div>
+                        <div className="location">
+                            <h2>Location</h2>
+                            <Select
+                                className="select"
+                                options={locations}
+                                value={selectedLocation}
+                                onChange={(value) => setSelectedLocation(value)}
+                            />
+                        </div>
+                        <div className="people">
+                            <h2>People</h2>
+                            <Select
+                                className="select"
+                                options={peopleOptions}
+                                value={selectedPeople}
+                                onChange={(value) => setSelectedPeople(value)}
+                            />
+                        </div>
 
-                    </div>
-                    <div className="time">
-                        <h2>Time</h2>
-                        <Select
-                            options={timeOptions}
-                            value={selectedTime}
-                            onChange={(value) => setSelectedTime(value)}
-                        />
-                    </div>
-                    <div className="location">
-                        <h2>Location</h2>
-                        <Select
-                            options={locations}
-                            value={selectedLocation}
-                            onChange={(value) => setSelectedLocation(value)}
-                        />
-                    </div>
-                    <div className="people">
-                        <h2>People</h2>
-                        <Select
-                            options={peopleOptions}
-                            value={selectedPeople}
-                            onChange={(value) => setSelectedPeople(value)}
-                        />
-                    </div>
-
-                    <div className="search-button">
-                        <button onClick={handleSearch}>
-                            <img src="./search.png" alt="search" />
-                        </button>
+                        <div className="search-button">
+                            <button onClick={handleSearch}>
+                                <img src="./search.png" alt="search" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
