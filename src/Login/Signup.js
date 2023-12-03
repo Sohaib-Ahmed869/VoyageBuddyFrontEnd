@@ -36,7 +36,7 @@ const Signup = () => {
 
     const handleBackToSignIn = (event) => {
         event.preventDefault();
-        window.location.href = "/";
+        window.location.href = "/login";
     }
     return (
         <div className="signup">

@@ -28,6 +28,12 @@ const Login = () => {
         window.location.href = "/signup";
     }
 
+    const handleGotoHome = (event) => {
+        event.preventDefault();
+        window.location.href = "/booking";
+    }
+
+
 
     return (
         <div className="login">
@@ -44,7 +50,7 @@ const Login = () => {
                     <label for="lname">Password</label>
                     <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                     <p className="forgotpass" onClick={handleForgotPassword}>Forgot password?</p>
-                    <button type="submit">Sign in</button>
+                    <button type="submit" onClick={handleGotoHome}>Sign in</button>
                     <p className="donthave" onClick={handleGoToSignUp}>Don't have an account? <a href="#">Sign up</a></p>
                 </form>
                 <div className="login_form_social">
