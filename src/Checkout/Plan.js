@@ -85,7 +85,7 @@ const Trip = () => {
     const navigateToCheckOut = () => {
         window.location.href = "/checkout";
     }
-    const budget = 10000;
+    const budget = 10000;   
     const activities = 5000;
     const transport = 5000;
     return (

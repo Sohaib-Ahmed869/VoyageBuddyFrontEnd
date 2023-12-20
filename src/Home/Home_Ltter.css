@@ -47,3 +47,31 @@
     font-size: 20px;
     margin-bottom: 20px;
 }
+
+@media screen and (max-width: 600px) {
+    .Home_Letter {
+        margin: 0 auto;
+        height: 100%;
+        width: 100%;
+        border-radius: 25px;
+        padding: 20px;
+
+    }
+    .Home_Letter h1 {
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+    }
+    .Home_Letter_Text form input {
+        width: 100%;
+        font-size: 11px;
+        height: 30px;
+
+    }
+    .Home_Letter_Text form button {
+        width: 100%;
+        font-size: 14px;
+        height: 40px;
+    }
+    
+}

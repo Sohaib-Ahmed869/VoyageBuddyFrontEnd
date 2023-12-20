@@ -60,7 +60,7 @@ const Signup = () => {
                     </div>
                     <div className="signup_form_row">
                         <div className="signup_form_column">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email">Email</label><br></br>
                             <input className="i" type="text" value={email} onChange={handleEmailChange} />
                         </div>
                         <div className="signup_form_column">

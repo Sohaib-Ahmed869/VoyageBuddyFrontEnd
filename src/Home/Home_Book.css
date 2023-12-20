@@ -48,3 +48,21 @@
 .home_book .home_book_text .steps .step .step_text h3{
     color: #2e2e2e;
 }
+
+@media screen and (max-width: 600px) {
+  .home_book {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .home_book .home_book_text {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .home_book .home_book_img {
+    width: 0px;
+    height: 0px;
+    align-items: left;
+  }
+}

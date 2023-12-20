@@ -42,7 +42,6 @@ const Home_Book = () => {
                         )
                     }
                     )}
-
                 </div>
 
             </div>

@@ -148,12 +148,6 @@
     border: 0px solid #ddd;
 }
 
-@media screen and (max-width: 768px) {
-    .search-bottom > div {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-}
 
 .date-container {
     display: flex;
@@ -204,4 +198,110 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+}
+
+
+/* Your existing styles */
+
+.search-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .search-component {
+        margin-top: 30px; /* Adjust as needed */
+        margin-bottom: 30px; /* Adjust as needed */
+    }
+
+    .search-top {
+        width: 80%; /* Adjust as needed */
+        font-size: 12px; /* Adjust as needed */
+        padding: 15px; /* Adjust as needed */
+    }
+
+    .search-bottom {
+        padding: 15px; /* Adjust as needed */
+        display: block;
+       
+    }
+
+
+    .search-bottom > div {
+        margin-right: 0;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+
+
+
+    }
+
+    .search-button img {
+        width: 20px; /* Adjust as needed */
+        height: 20px; /* Adjust as needed */
+       
+    }
+
+    .search-bottom input,
+    .select {
+        font-size: 12px; /* Adjust as needed */
+        width: 80%; /* Adjust as needed */
+    }
+
+    .search-bottom h2 {
+        font-size: 12px; /* Adjust as needed */
+    }
+
+    .select {
+        max-width: 100%; /* Adjust as needed */
+    }
+
+    .top-destination {
+        padding: 50px; /* Adjust as needed */
+    }
+
+    .top-destination h1 {
+        font-size: 20px; /* Adjust as needed */
+    }
+
+    .top-destination-container {
+        height: 100%; /* Adjust as needed */
+        width: 100%; /* Adjust as needed */
+        display: flex;
+        flex-direction: column; /* Adjust as needed */
+        
+    }
+
+    .top-destination-card img {
+        height: 250px; /* Adjust as needed */
+        width: 100%; /* Adjust as needed */
+        border-radius: 0px; /* Adjust as needed */
+    }
+
+    .top-destination-card-info h2 {
+        font-size: 14px; /* Adjust as needed */
+    }
+
+    .top-destination-card-info h3 {
+        font-size: 12px; /* Adjust as needed */
+    }
+
+    .top-destination-card-info h4 {
+        font-size: 12px; /* Adjust as needed */
+    }
+
+    .ad {
+        height: 30vh; /* Adjust as needed */
+        width: 100%; /* Adjust as needed */
+    }
+
+    .ad img {
+        border-radius: 10px; /* Adjust as needed */
+
+    }
+
 }

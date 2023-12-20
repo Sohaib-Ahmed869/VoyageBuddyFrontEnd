@@ -188,3 +188,29 @@
 
 
 
+@media screen and (max-width: 600px) {
+    .trip .main-image {
+        height: 40vh;
+    }
+    .days {
+        width: 100%;
+        
+    }
+    .day {
+        width: 80%;
+    }
+    .budget-breakdown {
+        width: 80%;
+    }
+
+    .budget-breakdown h2 {
+        font-size: 20px;
+    }
+    .budget-breakdown p {
+        font-size: 14px;
+    }
+    .days .addmore {
+        border-bottom-right-radius: 8px;
+    }
+    
+}

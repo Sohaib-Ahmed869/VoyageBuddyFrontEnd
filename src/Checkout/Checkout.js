@@ -63,6 +63,7 @@ const Checkout = () => {
         const taxes = 0;
         const serviceFare = 0;
 
+        
         // Calculate the total including discounts, taxes, and service fees
         const finalTotal = total - discount + taxes + serviceFare;
 

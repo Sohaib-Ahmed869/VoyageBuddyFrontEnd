@@ -98,3 +98,35 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+/* Your existing styles */
+
+
+/* Add this CSS to target screens with a maximum width of 600 pixels */
+
+@media screen and (max-width: 600px) {
+    .precheckout {
+        margin-top: 100px;
+        padding: 50px; /* Adjust as needed */
+    }
+
+    .precheckout_form_left_rating button {
+        font-size: 14px; /* Adjust as needed */
+        padding: 10px 15px; /* Adjust as needed */
+        margin-right: 5px; /* Adjust as needed */
+    }
+
+    .precheckout_form_left_amenities_list,
+    .precheckout_form_left_trips {
+        font-size: 12px; /* Adjust as needed */
+        margin-bottom: 5px; /* Adjust as needed */
+    }
+
+    .precheckout_form_left_submit .back,
+    .precheckout_form_left_submit .next {
+        padding: 10px 60px; /* Adjust as needed */
+        font-size: 14px; /* Adjust as needed */
+        margin-right: 5px; /* Adjust as needed */
+    }
+}
+

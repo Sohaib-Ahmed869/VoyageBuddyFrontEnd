@@ -61,3 +61,21 @@
 .services .service2 .text {
     margin-bottom: 40px;
 }
+
+
+@media screen and (max-width: 600px) {
+    .services {
+        padding: 20px;
+    }
+
+    .services .service1 {
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .services .service2 {
+        width: 100%;
+        margin-left: 0px;
+    }
+}
