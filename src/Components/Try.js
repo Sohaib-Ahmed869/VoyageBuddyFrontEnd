@@ -19,7 +19,8 @@ const AirportSearch = () => {
           'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
         }
       });
-
+      console.log(query);
+      console.log(response.data);
       setResults(response.data);
       setError(null);
     } catch (error) {
