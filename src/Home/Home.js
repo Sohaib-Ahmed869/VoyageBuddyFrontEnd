@@ -18,7 +18,7 @@ const Home = () => {
                                 <p className="home_text3"> With Our Cutting-Edge AI Trip Planner</p>
                             </div>
                             <p className="desc">Embark on a seamless journey of exploration with TouristBot, your personal travel assistant designed to elevate your travel experience. Discover, plan, and customize your adventures effortlessly.</p>
-                            <button className="home_button">Start Planning</button>
+                            <button className="home_button" onClick={() => window.location.href = "/hotels"}>Start Planning</button>
                         </div>
                     </div>
                     <div className="home_img">

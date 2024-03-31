@@ -61,19 +61,30 @@
     .navbar{
         width: 100%;
     }
+
     .navbar_links {
         display: none; /* Initially hide the links in mobile */
         flex-direction: column;
         align-items: center;
-        width: 100%;
+        width: 80%;
         text-align: center;
+        justify-content: center;
+
         position: absolute;
         top: 80px; /* Adjust the top position as needed */
-        left: 0;
+        right: 0;
         background-color: #ffffff;
         z-index: 2;
         padding: 0px;
         margin: 0px;
+        border: 0px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 1);
+        
+    }
+
+    .navbar_links a{
+        margin: 10px 0;
     }
 
     .navbar_links.show {
@@ -85,10 +96,13 @@
         flex-direction: column;
         cursor: pointer;
         margin-right: 50px;
+        font-size: 1.5rem;
+        width: 25px;
+        
     }
 
     .bar {
-        width: 25px;
+        width: 40px;
         height: 3px;
         background-color: #000;
         margin: 6px 0;

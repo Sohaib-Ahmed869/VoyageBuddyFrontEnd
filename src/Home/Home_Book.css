@@ -53,6 +53,7 @@
   .home_book {
     flex-direction: column;
     padding: 20px;
+    width: 90%;
   }
 
   .home_book .home_book_text {

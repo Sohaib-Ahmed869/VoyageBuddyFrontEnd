@@ -49,10 +49,11 @@
 }
 
 @media screen and (max-width: 600px) {
+    .newsletter {
+        padding: 50px;
+    }
     .Home_Letter {
-        margin: 0 auto;
         height: 100%;
-        width: 100%;
         border-radius: 25px;
         padding: 20px;
 

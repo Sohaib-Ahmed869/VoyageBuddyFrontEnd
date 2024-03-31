@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="footer_top">
                 <div className="footer_top_left">
                     <img src="./logo.png" alt="logo" />
-                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam</p>
+                    <p>Plan your next travel with us</p>
                     <div className="footer_top_left_icons">
                         <i className="fab fa-facebook-f"></i>
                         <i className="fab fa-twitter"></i>

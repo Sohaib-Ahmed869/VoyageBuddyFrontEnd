@@ -96,6 +96,12 @@
     align-items: center;
 }
 
+.Saved-Item-Details .column .price {
+    display: flex;
+    text-align: right;
+    justify-content: right;
+    align-items: center;
+}
 @media screen and (max-width: 1390px) {
     .Saved-main {
         padding: 100px;
@@ -116,9 +122,20 @@
         flex-direction: column;
     }
 
+    .Saved-Item-Details {
+        flex-direction: column;
+    }
+
+    .Saved-Item-Details .column .price {
+        text-align: left;
+        justify-content: left;
+        align-items: left;
+
+    }
+
     .Saved-Item-Image img {
         border-radius: 8px 8px 0 0; /* Round all corners */
-        width: 90%;
+        width: 80%;
         height: auto;
     }
 }

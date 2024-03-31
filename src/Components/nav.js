@@ -45,12 +45,12 @@ const Navbar = () => {
                 style={{ cursor: 'pointer'}}
                  onClick={onLogout}>Logout</a> : <a href="/login">Login</a>}
                 {user ? null: <a href="/signup">Signup</a>}
-                <a href="/notifications" className="notifs"><img src="./notifs.png" alt="notifs" /></a>
+                {/* <a href="/notifications" className="notifs"><img src="./notifs.png" alt="notifs" /></a> */}
             </div>
             <div className="mobile_menu_icon" onClick={toggleMobileMenu}>
-                <div className={`bar ${isMobileMenuOpen ? 'change' : ''}`}></div>
-                <div className={`bar ${isMobileMenuOpen ? 'change' : ''}`}></div>
-                <div className={`bar ${isMobileMenuOpen ? 'change' : ''}`}></div>
+                <div className={`bar ${isMobileMenuOpen ? '' : ''}`}></div>
+                <div className={`bar ${isMobileMenuOpen ? '' : ''}`}></div>
+                <div className={`bar ${isMobileMenuOpen ? '' : ''}`}></div>
             </div>
         </div>
     );

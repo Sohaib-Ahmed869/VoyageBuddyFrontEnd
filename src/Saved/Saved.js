@@ -94,7 +94,7 @@ const Saved = () => {
                                         </div>
                                     </div>
                                     <div className="column">
-                                        <div className="price" style={{display: "flex", alignItems: "center", justifyContent: "right", textAlign: "right"}}>
+                                        <div className="price">
 
                                             <img src="./icon_duration.png" alt="Duration" style={{width: "20px", height: "20px"}}/>
                                             <h5>Duration: </h5>
