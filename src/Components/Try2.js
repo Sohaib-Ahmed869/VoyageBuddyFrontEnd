@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './nav';
-
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button
+} from 'react-bootstrap';
+import { auth } from '../firebase'
+import { collection, doc, getDoc, getDocs, getFirestore, setDoc, addDoc, updateDoc, query, where } from "firebase/firestore";
+import { firestore } from '../firebase';
 import './Try2.css';
 import Hero from '../Booking/Hero';
+import Footer from './footer';
 
 
 const HotelSearch = () => {
+  const [user, setUser] = useState(null);
   const [topdestinations, setTopdestinations] = useState([]);
   const [location, setLocation] = useState('');
   const [locations, setLocations] = useState([]);
@@ -18,7 +29,23 @@ const HotelSearch = () => {
   const [airports, setAirports] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user.uid);
+        setUser(user);
+
+      } else {
+        window.location.href = "/login";
+        console.log("No user is signed in");
+      }
+    });
+    return unsubscribe;
+  }
+    , []);
 
   const handleInputChange = (e, setter) => {
     setter(e.target.value);
@@ -54,7 +81,13 @@ const HotelSearch = () => {
       });
 
       console.log(response.data);
-      setAirports(response.data);
+      //GET ONE RANDOM AIRPORT
+      let airports = response.data.data;
+      console.log('AIRPORTS', airports)
+      let randomAirport = airports[Math.floor(Math.random() * airports.length)];
+      console.log(randomAirport);
+      setAirports([randomAirport]);
+
       setError(null);
     } catch (error) {
       setAirports([]);
@@ -115,6 +148,7 @@ const HotelSearch = () => {
   };
 
   const handleHotelsSearch = async () => {
+    setLoading(true);
     try {
       const response = await axios.get('https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchHotels', {
         params: {
@@ -135,29 +169,38 @@ const HotelSearch = () => {
     } catch (error) {
       setResults(null);
       setError(error.message || 'An error occurred');
+    } finally {
+      setLoading(false);
     }
+
   };
-  const [topDes, settopDes] = useState([]);
-  const getTopDestinations = () => {
+
+
+
+  const handleSaveTrip = async () => {
+    alert ('Saving trip');
     try {
-      //get first object in the data returned
+      const trip = {
+        location,
+        checkIn,
+        checkOut,
+        restaurants: restaurants.data,
+        hotels: results,
+        airports: airports,
+        uid: user.uid
+      };
 
-      const top_restaurant = restaurants.data[0];
-      const top_hotel = results[0];
-      const top_airport = airports.data[0];
-      const updatedTopDestinations = [top_restaurant, top_hotel, top_airport];
-      setTopdestinations(updatedTopDestinations);
+      const firestore = getFirestore();
+      const tripsCollection = collection(firestore, 'trips');
+      const tripDoc = doc(tripsCollection);
+      await setDoc(tripDoc, trip);
 
-      const tophotel = { price: top_hotel.priceForDisplay, name: top_hotel.title }
-      const topresturant = { price: top_restaurant.priceTag, name: top_restaurant.name, image: top_restaurant.heroImgUrl }
-      const topairpot = { price: top_airport.price, name: top_airport.name, image: top_airport.url }
-
-      setTopdestinations([tophotel, topresturant, topairpot]);
-      console.log(updatedTopDestinations);
+      alert('Trip saved successfully');
     } catch (error) {
       console.error(error);
     }
-  };
+  }
+
 
 
 
@@ -176,7 +219,7 @@ const HotelSearch = () => {
   }, [locations]);
 
   useEffect(() => {
-    getTopDestinations();
+
   }, [restaurants, results, airports]);
 
 
@@ -193,9 +236,11 @@ const HotelSearch = () => {
   const [days, setDays] = useState(calculateDays(checkIn, checkOut));
 
   const [dayPLans, setDayPlans] = useState([]);
+  const [dates, setDates] = useState([]);
 
   const getDayPlans = () => {
     try {
+
       setDays(calculateDays(checkIn, checkOut));
       const dayPlans = [];
       for (let i = 0; i < days; i++) {
@@ -203,15 +248,73 @@ const HotelSearch = () => {
           day: i + 1,
           restaurants: restaurants.data.slice(i * 3, (i + 1) * 3),
           hotels: results.slice(i * 3, (i + 1) * 3),
-          airports: airports.data.slice(i * 3, (i + 1) * 3)
+          airports: airports
         }
         dayPlans.push(dayPlan);
       }
+      //set dates
+      const dates = [];
+      for (let i = 0; i < days; i++) {
+        const date = new Date(checkIn);
+        date.setDate(date.getDate() + i);
+        dates.push(date);
+      }
+      setDates(dates);
+
       setDayPlans(dayPlans);
     } catch (error) {
       console.error(error);
     }
   }
+
+  const generateDayPlans = (restaurant, hotel) => {
+    const restaurantStyle = { color: "#8566FF" };
+    const hotelStyle = {
+      color: "#E5AE47",
+      textDecorationLine: 'underline',
+    };
+
+    return (
+      <p>
+        Good morning! Kickstart your day with a delightful breakfast experience at{' '}
+        <span style={restaurantStyle}>{restaurant.name}</span>. Afterward, make your way to{' '}
+        <span style={hotelStyle}>{hotel.title}</span> for a serene and relaxing morning.
+      </p>
+    );
+  }
+
+  const generateAfternoonPlan = (restaurant, hotel) => {
+    const restaurantStyle = { color: '#8566FF' };
+    const hotelStyle = { color: '#E5AE47', textDecorationLine: 'underline' };
+
+    const plan = (
+      <p>
+        Hello again! This afternoon, indulge in a scrumptious lunch at{' '}
+        <span style={restaurantStyle}>{restaurant.name}</span>. Later, unwind and recharge at{' '}
+        <span style={hotelStyle}>{hotel.title}</span> for a peaceful and refreshing afternoon.
+      </p>
+    );
+
+    return plan;
+  };
+
+  const generateEveningPlan = (restaurant, hotel) => {
+    const restaurantStyle = { color: '#8566FF' };
+    const hotelStyle = { color: '#E5AE47', textDecorationLine: 'underline' };
+
+    const plan = (
+      <p>
+        Good evening! Conclude your day with a delectable dinner at{' '}
+        <span style={restaurantStyle}>{restaurant.name}</span>. Enjoy a restful night at{' '}
+        <span style={hotelStyle}>{hotel.title}</span>.
+      </p>
+    );
+
+    return plan;
+  };
+
+
+
 
   useEffect(() => {
     getDayPlans();
@@ -220,151 +323,216 @@ const HotelSearch = () => {
     , [restaurants, results, airports]);
 
   const searchHandle = () => {
+
     handleAirportSearch();
     handleHotelsSearch();
     handleRestaurantSearch(); // Add restaurant search
     calculateDays(checkIn, checkOut);
-    getTopDestinations();
+    // getTopDestinations();
     getDayPlans();
 
   };
   return (
+
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
 
-
-      <div className='search-book'>
-        <Hero />
-        <div>
-          <label>
-            Location:
-            <input type="text" value={location} onChange={(e) => handleInputChange(e, setLocation)} />
-          </label>
-          {selectedLocation && (
-            <div>
-              <p>Selected Location: {selectedLocation.title}, {selectedLocation.secondaryText}</p>
-            </div>
-          )}
-          <label>
-            Check-In:
-            <input type="date" value={checkIn} onChange={(e) => handleInputChange(e, setCheckIn)} />
-          </label>
-          <label>
-            Check-Out:
-            <input type="date" value={checkOut} onChange={(e) => handleInputChange(e, setCheckOut)} />
-          </label>
-          <button onClick={searchHandle}>Search</button>
+      <Hero />
+      {loading && (
+        <div className="spinner-loader">
+          <div className="spinner"></div>
         </div>
-        <div>
-          <h1>Day Planning</h1>
-          {
-            /*
-            iterate for the number of days
-            for each day, get the top 3 restaurants, hotels, and airports
-            display the top 3 restaurants, hotels, and airports for each day
+      )}
+      <div className='search-book' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '0px solid black', margin: '10px', padding: '10px', borderRadius: '10px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }}>
 
-            */
-          }
-          {dayPLans.map((dayPlan) => (
-            <div>
-              <h2>Day {dayPlan.day}</h2>
-              <div>
-                <h3>Restaurants</h3>
-                {dayPlan.restaurants.map((restaurant) => (
-                  <div>
-                    {
-                      restaurant.heroImgUrl && (
-                        <img src={restaurant.squareImgUrl}
-                          alt="Restaurant Image"
-                          onError={(e) => {
-                            e.target.src = './notfound.jpg'; // Set a default image when the main image fails to load
-                          }}
-                        />
-                      )
-                    }
+        <Container className='search-container'>
+          <Row>
+            <div className='search-form' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '0px solid black', margin: '10px', padding: '10px', borderRadius: '10px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }}>
+              <h4 style={{ color: '#8566FF' }}>Search for Hotels, Restaurants, and Airports</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <label >
+                  Location
 
-
-                    <h4>{restaurant.name}</h4>
-                    <p>{restaurant.priceTag}</p>
-                  </div>
-                ))}
+                </label>
+                <input type="text" value={location} onChange={(e) => handleInputChange(e, setLocation)} style={{ textAlign: 'center', fontSize: '14px', justifyContent: 'center', width: '200px', height: '30px', border: '0px solid black', padding: '3px', margin: '5px', borderRadius: '5px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }} />
               </div>
-              <div>
-                <h3>Hotels</h3>
-                {dayPlan.hotels.map((hotel) => (
-                  <div>
+              {selectedLocation && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-                    <h4>{hotel.title}</h4>
-                    <p>{hotel.priceForDisplay}</p>
-                  </div>
-                ))}
+                  <p
+                    style={{ color: '#8566FF' }}
+                  >Selected Location: {selectedLocation.title.replace(/<\/?b>/g, '')}, {selectedLocation.secondaryText}</p>
+                </div>
+              )}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <label>
+                  Check-In:
+
+                </label>
+                <input type="date" value={checkIn} onChange={(e) => handleInputChange(e, setCheckIn)} style={{ width: '200px', height: '30px', borderRadius: '5px', border: '0px solid black', padding: '3px', margin: '5px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }} />
               </div>
-              <div>
-                <h3>Airports</h3>
-                {dayPlan.airports.map((airport) => (
-                  <div>
-                    <h4>{airport.name}</h4>
-                    <p>{airport.price}</p>
-                  </div>
-                ))}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <label>
+                  Check-Out:
+                </label>
+                <input type="date" value={checkOut} onChange={(e) => handleInputChange(e, setCheckOut)} style={{ width: '200px', height: '30px', borderRadius: '5px', border: '0px solid black', padding: '3px', margin: '5px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <button
+                  style={{ justifyContent: 'center', marginTop: '20px', marginBottom: '20px', color: 'white', fontSize: '20px', border: '0px solid black', padding: '10px', cursor: 'pointer', backgroundColor: '#8935c4', borderRadius: '5px', width: '200px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }}
+                  onClick={searchHandle}>Search</button>
               </div>
             </div>
-          ))}
+            <Card>
+              {
+                /*
+                iterate for the number of days
+                for each day, get the top 3 restaurants, hotels, and airports
+                display the top 3 restaurants, hotels, and airports for each day
+    
+                */
+              }
+              {dayPLans.map((dayPlan) => (
+                <div className='dayplan-container'>
+                  <h1
+                    style={{ color: '#8566FF' }}
+                  >{dates[dayPlan.day - 1].toDateString()}</h1>
+
+                  <div className='form-group' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '1px solid black', margin: '10px' }}>
+                    <div style={{ alignItems: 'center', textAlign: 'center' }}>
+
+                      <h2>Day {dayPlan.day}</h2>
+                    </div>
+
+                    <Col style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F3F2FF', padding: '25px', width: '70%' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#F3F2FF', padding: '25px', borderRadius: '10px' }}>
+                        <div>
+
+                          <p
+
+                          >{generateDayPlans(dayPlan.restaurants[0], dayPlan.hotels[0])} {generateAfternoonPlan(dayPlan.restaurants[1], dayPlan.hotels[1])} {generateEveningPlan(dayPlan.restaurants[2], dayPlan.hotels[2])}</p>
+
+                        </div>
+                      </div>
+                    </Col>
+                    <div style={{ justifyContent: 'space-between', marginTop: '40px', marginBottom: '40px' }} className='dayplans'>
+                      {dayPlan.restaurants.slice(0, -1).map((restaurant) => (
+
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '0px solid black', margin: '10px', borderRadius: '0px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }} className='dayplan'>
+
+                          {
+                            restaurant.heroImgUrl && (
+                              <img src={restaurant.squareImgUrl}
+                                alt="Restaurant Image"
+                                style={{ width: '100%', height: '250px', borderRadius: '0px', marginLeft: '0px' }}
+                                onError={(e) => {
+                                  e.target.src = './notfound.jpg'; // Set a default image when the main image fails to load
+                                }}
+                              />
+                            )
+                          }
+                          <h4>{restaurant.name}</h4>
+                          <p>{restaurant.priceTag}</p>
+                        </div>
+
+                      ))}
+                      <div style={{ justifyContent: 'space-between' }} className='dayplans'>
+                        {dayPlan.hotels.slice(0, -1).map((hotel) => (
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '0px solid black', margin: '10px', borderRadius: '0px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)' }} className='dayplan'>
+                            <img src={hotel.cardPhotos[0].sizes.urlTemplate.replace('{width}', 300).replace('{height}', 300)}
+                              alt="Hotel Image"
+                              style={{ width: '100%', height: '250px', borderRadius: '0px', marginLeft: '0px' }}
+                              onError={(e) => {
+                                e.target.src = './notfound.jpg'; // Set a default image when the main image fails to load
+                              }}
+                            />
+                            { hotel.title && (
+                            <h4
+                              style={{ width: '180px', borderRadius: '0px', textAlign: 'center' }}
+                            >{hotel.title}</h4>
+                            )}
+                            <p>{hotel.priceForDisplay}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                    </div>
+
+                    <div>
+                      {
+                        //if last day, show airport
+
+                      }
+                      {
+                        dayPlan.day === days && (
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <h3>Popular Checkout Airport</h3>
+                            <div>
+                              {dayPlan.airports.map((airport) => (
+                                <div>
+                                  <h4>{airport.name}</h4>
+                                  <p>{airport.price}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )
+
+                      }
+                    </div>
 
 
-        </div>
+
+
+                  </div>
+                </div>
+              ))}
+
+
+            </Card>
+          </Row>
+        </Container>
         <div>
           <h1>Airport Search</h1>
 
           {airports && (
             <div>
-              <h2>Airports:</h2>
-              <pre>{JSON.stringify(airports, null, 2)}</pre>
+              {airports[0] && (
+
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <p style={{ color: '#8566FF' }}>Top Airport:</p>
+                  <p style={{ color: '#8566FF' }}>{airports[0].shortName} - {airports[0].airportCode}</p>
+                </div>
+              )}
             </div>
           )}
           {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
-        {results && (
-          <div>
-            <h2>Results:</h2>
-            <pre>{JSON.stringify(results, null, 2)}</pre>
-          </div>
-
-        )}
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-      </div>
-
-      <div className="restaurants">
-        {restaurants && (
-          <div>
-            <h2>Restaurants:</h2>
-            <pre>{JSON.stringify(restaurants, null, 2)}</pre>
-          </div>
-        )}
         {error && <div style={{ color: 'red' }}>{error}</div>}
 
-
-      </div>
-      <div className="ad">
-        <img src="./ad.png" alt="ad" />
-      </div>
-
-      <div className="top-destination">
-        <h1>✈ • Top Destinations</h1>
-        <div className="top-destination-container">
-          {topdestinations.map((topdestination) => (
-            <div className="top-destination-card">
-              <img src={topdestination.image} alt="top-destination" />
-              <div className="top-destination-info">
-                <h2>{topdestination.name}</h2>
-                <h3>{topdestination.price}</h3>
-              </div>
-            </div>
-          ))}
-
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <button
+          onClick={handleSaveTrip}
+          style={{ justifyContent: 'center', marginTop: '20px', marginBottom: '20px', color: 'white', fontSize: '20px', border: '1px solid black', padding: '10px', cursor: 'pointer', backgroundColor: '#8935c4', borderRadius: '5px' }}
+          >Save Trip</button>
         </div>
-      </div>
-    </div>
+
+
+
+        <div className="ad">
+          <img src="./ad.png" alt="ad" />
+        </div>
+
+        
+      </div >
+      <Footer />
+
+    </div >
+
+
   );
 };
 

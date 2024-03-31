@@ -67,7 +67,7 @@
     color: #3f53ec;
     text-decoration: underline;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .footer {
         padding: 0px;
         width: 100%;

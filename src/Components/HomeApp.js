@@ -17,7 +17,7 @@ const HomeApp = () => {
                 <Navbar />
                 <Home />
                 <Home_Book />
-                <HomePlan />
+               
                 <Home_Show />
                 <Home_Letter />
                 <Footer />

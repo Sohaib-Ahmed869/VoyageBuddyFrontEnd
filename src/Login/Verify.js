@@ -1,4 +1,8 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { auth } from "../firebase"; 
+
+import { getAuth, sendEmailVerification } from 'firebase/auth';
 
 import './Verify.css'
 
@@ -7,6 +11,46 @@ const Verify = () => {
     const [code2, setCode2] = React.useState("");
     const [code3, setCode3] = React.useState("");
     const [code4, setCode4] = React.useState("");
+    const [loading, setLoading] = React.useState(true);
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log(user.uid);
+                setUser(user);
+                
+            } else {
+                window.location.href = "/login";
+                console.log("No user is signed in");
+            }
+        });
+        return unsubscribe;
+    }
+        , []);
+
+
+    useEffect(() => {
+        if(loading) {
+            const auth = getAuth();
+            sendEmailVerification(auth.currentUser)
+            .then(() => {
+                console.log("Email sent");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            setLoading(false);
+
+        }
+    }
+        , [loading]);
+
+
+    
+        
+
 
     const handleCode1Change = (event) => {
         const { value } = event.target;
@@ -62,7 +106,7 @@ const Verify = () => {
 
                     <p className="nocode">Didn't receive a code? <a href="#">Resend</a></p>
                 </form>
-                
+
             </div>
         </div>
     )
