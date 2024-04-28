@@ -81,7 +81,7 @@ const Login = () => {
                         <input type="text" placeholder="Enter your email" value={email} onChange={handleEmailChange} />
                         <label for="lname">Password</label>
                         <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-                        {/* <p className="forgotpass" onClick={handleForgotPassword}>Forgot password?</p> */}
+                        <p className="forgotpass" onClick={handleForgotPassword}>Forgot password?</p>
                         <button type="submit" onClick={handleSubmit}>Sign in</button>
                         <p className="donthave" onClick={handleGoToSignUp}>Don't have an account? <a href="#">Sign up</a></p>
                     </form>
